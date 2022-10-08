@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react';
 import useTheme, { ThemeProvider } from './hooks/useTheme';
 import { SafeAreaView } from 'react-native';
@@ -13,38 +14,44 @@ import { SendMoney } from './screens/SendMoney.screens';
 const Stack = createStackNavigator();
 
 export const App: React.FC = () => {
-
     const { colors } = useTheme();
-    
+
     return (
-        <NavigationContainer>
-            <SafeAreaProvider>
-                <SafeAreaView style={{ flex: 1, backgroundColor: colors.primaryBackground  }}>
-                    <ThemeProvider>
-                        <Stack.Navigator
-                            screenOptions={{ headerShown: false }}
-                            initialRouteName="WelcomeScreen"
-                        >
-                            <Stack.Screen
-                                name="WelcomeScreen"
-                                component={Welcome}
-                            />
-                            <Stack.Screen
-                                name="Dashboard"
-                                component={Dashboard}
-                            />
-                            <Stack.Screen
-                                name="NewRequest"
-                                component={NewRequest}
-                            />
-                            <Stack.Screen
-                                name="SendMoney"
-                                component={SendMoney}
-                            />
-                        </Stack.Navigator>
-                    </ThemeProvider>
-                </SafeAreaView>
-            </SafeAreaProvider>
-        </NavigationContainer>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <NavigationContainer>
+                <SafeAreaProvider>
+                    <SafeAreaView
+                        style={{
+                            flex: 1,
+                            backgroundColor: colors.primaryBackground
+                        }}
+                    >
+                        <ThemeProvider>
+                            <Stack.Navigator
+                                screenOptions={{ headerShown: false }}
+                                initialRouteName="WelcomeScreen"
+                            >
+                                <Stack.Screen
+                                    name="WelcomeScreen"
+                                    component={Welcome}
+                                />
+                                <Stack.Screen
+                                    name="Dashboard"
+                                    component={Dashboard}
+                                />
+                                <Stack.Screen
+                                    name="NewRequest"
+                                    component={NewRequest}
+                                />
+                                <Stack.Screen
+                                    name="SendMoney"
+                                    component={SendMoney}
+                                />
+                            </Stack.Navigator>
+                        </ThemeProvider>
+                    </SafeAreaView>
+                </SafeAreaProvider>
+            </NavigationContainer>
+        </GestureHandlerRootView>
     );
 };
