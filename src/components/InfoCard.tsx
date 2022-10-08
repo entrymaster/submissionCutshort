@@ -37,12 +37,8 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         padding: 10,
-        // paddingBottom:20,
-        // flex:1,
         height: '80%',
         justifyContent: 'space-between'
-        // width:'80%'
-        // bottom:0
     },
     itemContainer: {
         height: '62%',

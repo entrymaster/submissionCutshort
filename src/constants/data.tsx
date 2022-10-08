@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native'
+import {Dimensions, ImageSourcePropType} from 'react-native'
 import Profile1 from '../assets/svg/Profile1.svg';
 import Profile2 from '../assets/svg/Profile2.svg';
 import Profile3 from '../assets/svg/Profile3.svg';
@@ -25,6 +25,9 @@ export const STRINGS = {
     amount: '200,000',
     requestMoney: 'Request money',
     sendMoney: 'Send money',
+    allTransactions: 'All Transactions',
+    sortBy: 'Sort by:',
+    recent: 'Recent',
 
     // New Request
     headerBack: 'Back',
@@ -95,4 +98,43 @@ export const peopleData = [
         image: <Profile6 strokeWidth={3} />,
         number: '(+234) 905 1694 275'
     }
+]
+
+export type TransactionDataType = {
+    id: string,
+    name: string,
+    image: ImageSourcePropType,
+    status: string,
+    amount: number
+}
+
+export const transactionData = [
+    {
+        id: '1',
+        name: 'Adeboye Usman',
+        image: require('../assets/Adeboye_Usman.png'),
+        status: 'Received',
+        amount: 200000
+    },
+    {
+        id: '2',
+        name: 'Mercy Popoola',
+        image: require('../assets/Mercy_Popoola.png'),
+        status: 'Failed',
+        amount: 110000
+    },
+    {
+        id: '3',
+        name: 'Onome Adetayo',
+        image: require('../assets/Onome_Adetayo.png'),
+        status: 'Sent',
+        amount: 10000
+    },
+    {
+        id: '4',
+        name: 'Kingsley Abiodun',
+        image: require('../assets/Kingsley_Abiodun.png'),
+        status: 'Received',
+        amount: 200000
+    },
 ]

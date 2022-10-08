@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import { DashboardHeader } from "../components/DashboardHeader";
 import { MoneyPanel } from "../components/MoneyPanel";
 import { SwipeUpWrapper } from "../components/SwipeUpWrapper";
+import { TransactionCard } from "../components/TransactionCard";
 
 export const Dashboard: React.FC = () => {
 
@@ -30,6 +31,8 @@ export const Dashboard: React.FC = () => {
             <MoneyPanel onRequestHandler={onRequestHandler} onSendHandler={onSendHandler} />
             <View style={styles.transactionContainer}>
                 <SwipeUpWrapper>
+
+                    <TransactionCard />
                     
                 </SwipeUpWrapper>
             </View>

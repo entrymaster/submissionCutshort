@@ -36,7 +36,7 @@ export const Label: React.FC<LabelProps> = ({
           case 'p':
             return [textStyles.headingDesc, { ...style }]
           default:
-            return { ...style }
+            return style
         }
       }
 

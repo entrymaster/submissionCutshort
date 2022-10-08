@@ -20,7 +20,7 @@ export const SIZES = {
   h4: 38,
   
   b1: 15,
-  b2: 13,
+  b2: 12.5,
 
   p: 16,
 
