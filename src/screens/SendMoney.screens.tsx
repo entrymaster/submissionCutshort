@@ -21,7 +21,7 @@ export const SendMoney: React.FC = () => {
     const {colors} = useTheme();
     const [searchText, setSearchText] = useState('');
     const [inputFocused, setInputFocused] = useState(false);
-    const [profileId, setProfileId] = useState(-1);
+    const [searchData, setSearchData] = useState<PeopleDataType[]>(peopleData);
     const [selectedProfile, setSelectedProfile] = useState<PeopleDataType | null>(null);
 
     React.useEffect(() => {
@@ -42,6 +42,13 @@ export const SendMoney: React.FC = () => {
         }
 
     }, [selectedProfile])
+
+
+    React.useEffect(() => {
+
+        setSearchData(peopleData.filter(i => i.name.toLowerCase().includes(searchText.toLowerCase())))
+
+    }, [searchText])
     
 
     return (
@@ -65,7 +72,7 @@ export const SendMoney: React.FC = () => {
                     height: windowHeight - headerHeight
                 }}
             >
-                {peopleData.map((item: PeopleDataType) => {
+                {searchData.map((item: PeopleDataType) => {
 
                     const newProps = {
                         stroke: selectedProfile?.id === item.id ? '#1DC76B' : '#fff',
