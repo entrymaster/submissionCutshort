@@ -12,11 +12,11 @@ export const NewRequest: React.FC = () => {
 
 
     return (
-        <View style={{flex:1}}>
+        <View style={{flex:1, backgroundColor: '#010A43'}}>
             <BackImg
                 style={{position: 'absolute'}}
                 preserveAspectRatio="xMinYMax slice"
-                width={(windowWidth+45)*scale}
+                width={(windowWidth)*scale}
             />
             
                 <Header />

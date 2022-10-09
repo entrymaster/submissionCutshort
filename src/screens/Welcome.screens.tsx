@@ -39,7 +39,7 @@ export const Welcome: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         bottom: 0,
-        left: 35,
+        left: 32,
         position:'absolute'
     },
     startBtn: {
