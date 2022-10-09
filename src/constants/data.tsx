@@ -45,7 +45,7 @@ export type PeopleDataType = {
     name: string,
     xPos: number,
     yPos: number,
-    image: JSX.Element,
+    image: ImageSourcePropType,
     number: string
 }
 
@@ -55,7 +55,7 @@ export const peopleData = [
         name: 'Adedoyin Leke',
         xPos: 147,
         yPos: 37,
-        image: <Profile1 strokeWidth={3} />,
+        image: require('../assets/png/Adedoyin_Leke.png'),
         number: '(+234) 905 1694 275'
     },
     {
@@ -63,7 +63,7 @@ export const peopleData = [
         name: 'Adeleke Adeyanju',
         xPos: 217,
         yPos: 126,
-        image: <Profile2 strokeWidth={3} />,
+        image: require('../assets/png/Adeleke_Adeyanju.png'),
         number: '(+234) 905 1694 275'
     },
     {
@@ -71,7 +71,7 @@ export const peopleData = [
         name: 'Adedoyin Leke',
         xPos: 279,
         yPos: 248,
-        image: <Profile3 strokeWidth={3} />,
+        image: require('../assets/png/Adedoyin_Leke1.png'),
         number: '(+234) 905 1694 275'
     },
     {
@@ -79,7 +79,7 @@ export const peopleData = [
         name: 'Aduni Wale',
         xPos: 157,
         yPos: 317,
-        image: <Profile4 strokeWidth={3} />,
+        image: require('../assets/png/Aduni_Wale.png'),
         number: '(+234) 905 1694 275'
     },
     {
@@ -87,7 +87,7 @@ export const peopleData = [
         name: 'Adolph colleague',
         xPos: 61,
         yPos: 217,
-        image: <Profile5 strokeWidth={3} />,
+        image: require('../assets/png/Adolph_colleague.png'),
         number: '(+234) 905 1694 275'
     },
     {
@@ -95,7 +95,7 @@ export const peopleData = [
         name: 'Adelaide Uti (son)',
         xPos: 28,
         yPos: 90,
-        image: <Profile6 strokeWidth={3} />,
+        image: require('../assets/png/Adelaide_Uti.png'),
         number: '(+234) 905 1694 275'
     }
 ]
@@ -112,28 +112,28 @@ export const transactionData = [
     {
         id: '1',
         name: 'Adeboye Usman',
-        image: require('../assets/Adeboye_Usman.png'),
+        image: require('../assets/png/Adeboye_Usman.png'),
         status: 'Received',
         amount: 200000
     },
     {
         id: '2',
         name: 'Mercy Popoola',
-        image: require('../assets/Mercy_Popoola.png'),
+        image: require('../assets/png/Mercy_Popoola.png'),
         status: 'Failed',
         amount: 110000
     },
     {
         id: '3',
         name: 'Onome Adetayo',
-        image: require('../assets/Onome_Adetayo.png'),
+        image: require('../assets/png/Onome_Adetayo.png'),
         status: 'Sent',
         amount: 10000
     },
     {
         id: '4',
         name: 'Kingsley Abiodun',
-        image: require('../assets/Kingsley_Abiodun.png'),
+        image: require('../assets/png/Kingsley_Abiodun.png'),
         status: 'Received',
         amount: 200000
     },

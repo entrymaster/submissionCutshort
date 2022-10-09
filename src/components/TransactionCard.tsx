@@ -16,13 +16,13 @@ export const TransactionCard: React.FC = () => {
     const ColorSwitch = (status: string) => {
         switch (status) {
             case 'Received':
-                return '#1DC7AC'
+                return colors.transactionReceived
             case 'Failed':
-                return '#FE4A54'
+                return colors.transactionFailed
             case 'Sent':
-                return '#FAAD39'
+                return colors.transactionSent
             default: 
-                return '#fff'
+                return colors.defaultWhite
         }
     }
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     cardHeaderContainer:{
         justifyContent:'space-between',
         flexDirection:'row',
-        padding:15
+        padding: 15
     },
     transactionLabel:{
         fontSize: SIZES.p,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     tagText:{
-        color:'#fff',
+        color: colors.defaultWhite,
         paddingLeft:5
     },
     amount:{

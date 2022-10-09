@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { STRINGS } from '../constants/data';
+import { View, StyleSheet, ImageSourcePropType, Image } from 'react-native';
+import { scale, STRINGS } from '../constants/data';
 import { Button } from './Button';
 import { Label } from './Label';
 
 type InfoCardProps = {
-    profileImg: JSX.Element;
+    profileImg: ImageSourcePropType;
     name: string;
     phoneNumber: string;
 };
@@ -18,7 +18,14 @@ export const InfoCard: React.FC<InfoCardProps> = ({
     return (
         <View style={styles.container}>
             <View style={styles.itemContainer}>
-                {React.cloneElement(profileImg, {width:72, height:72})}
+                {/* {React.cloneElement(profileImg, {width:72, height:72})} */}
+                <Image
+                    style={{
+                        height: 72 * scale,
+                        width: 72 * scale
+                    }}
+                    source={profileImg}
+                />
                 <Label type="title" content={name} />
                 <Label
                     type="tag-big"

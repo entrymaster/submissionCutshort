@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, Image, TouchableOpacity } from 'react-native';
 import BackImg from '../assets/svg/search_recipient.svg';
 import Profile2 from '../assets/svg/Profile2.svg';
 import { Header } from '../components/Header';
@@ -19,9 +19,10 @@ import { InfoCard } from '../components/InfoCard';
 export const SendMoney: React.FC = () => {
 
     const {colors} = useTheme();
-    const [searchText, setSearchText] = useState('');
-    const [inputFocused, setInputFocused] = useState(false);
+    const [searchText, setSearchText] = useState<string>('');
+    const [inputFocused, setInputFocused] = useState<boolean>(false);
     const [searchData, setSearchData] = useState<PeopleDataType[]>(peopleData);
+    const [bottomSheet, setBottomSheet] = useState<boolean>(false);
     const [selectedProfile, setSelectedProfile] = useState<PeopleDataType | null>(null);
 
     React.useEffect(() => {
@@ -39,6 +40,7 @@ export const SendMoney: React.FC = () => {
 
         if(selectedProfile != null){
             Keyboard.dismiss()
+            setBottomSheet(true);
         }
 
     }, [selectedProfile])
@@ -49,12 +51,23 @@ export const SendMoney: React.FC = () => {
         setSearchData(peopleData.filter(i => i.name.toLowerCase().includes(searchText.toLowerCase())))
 
     }, [searchText])
+
+
+    const touchEmptyAreaHandler = () => {
+        Keyboard.dismiss();
+        setBottomSheet(false);
+
+        setTimeout(() => {
+            setSelectedProfile(null)
+        }, 300);
+
+    }
     
 
     return (
         <View style={{ flex: 1 }}>
             <BackImg
-                style={{ position: 'absolute', zIndex: -1 }}
+                style={styles.background}
                 preserveAspectRatio="xMidYMid slice"
                 width={windowWidth}
             />
@@ -66,17 +79,14 @@ export const SendMoney: React.FC = () => {
                 setSearchText={setSearchText}
                 setInputFocused={setInputFocused}
             />
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View
-                style={{
-                    height: windowHeight - headerHeight
-                }}
-            >
+            <TouchableWithoutFeedback onPress={touchEmptyAreaHandler}>
+            <View style={styles.peopleContainer}>
                 {searchData.map((item: PeopleDataType) => {
 
-                    const newProps = {
-                        stroke: selectedProfile?.id === item.id ? '#1DC76B' : '#fff',
-                        onPress: ()=> setSelectedProfile(item)
+                    const selectStyle = {
+                        backgroundColor: selectedProfile?.id === item.id ? colors.selectedProfileColor : colors.defaultWhite,
+                        padding:(item.id === '2' ? 4 : 2),
+                        borderRadius: 50
                     };
 
                     return <View
@@ -86,18 +96,27 @@ export const SendMoney: React.FC = () => {
                             left: item.xPos*scale,
                             position: 'absolute',
                             alignItems:'center',
-                            // backgroundColor:'blue'
                         }}
                     >  
-                            {React.cloneElement(item.image, newProps)}
+                            {/* {React.cloneElement(item.image, newProps)} */}
+                            <TouchableOpacity activeOpacity={0.9} style={selectStyle} onPress={()=> setSelectedProfile(item)}>
+                                <Image
+                                    style={{
+                                        height: (item.id === '2' ? 72 : 36)*scale, 
+                                        width: (item.id === '2' ? 72 : 36)*scale, 
+                                    }} 
+                                    source={item.image} 
+                                />
+                            </TouchableOpacity>
+
                             <Label
                                 type='tag-small'
                                 content={item.name} 
-                                style={{color:selectedProfile?.id === item.id ? colors.selectedColor:colors.primaryTextColor,paddingTop:8}} />
+                                style={{color:selectedProfile?.id === item.id ? colors.selectedProfileColor : colors.primaryTextColor, paddingTop:8}} />
                     </View>
                 })}
-                <View style={{height:'40%',width:'100%', bottom:0, position:'absolute'}}>
-                {selectedProfile && <SwipeUpWrapper>
+                <View style={styles.infoContainer}>
+                {selectedProfile && <SwipeUpWrapper bottomSheet={bottomSheet}>
                     <InfoCard
                         profileImg={selectedProfile?.image}
                         name={selectedProfile?.name}
@@ -112,5 +131,17 @@ export const SendMoney: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-    
+    background:{ 
+        position: 'absolute',
+        zIndex: -1 
+    },
+    peopleContainer:{
+        height: windowHeight - headerHeight
+    },
+    infoContainer:{
+        height:'40%',
+        width:'100%',
+        bottom:0,
+        position:'absolute'
+    }
 })

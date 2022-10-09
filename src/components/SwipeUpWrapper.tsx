@@ -2,17 +2,18 @@ import React from 'react'
 import {View, StyleSheet} from 'react-native'
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { scale, windowHeight } from '../constants/data';
+import { PeopleDataType, scale, windowHeight } from '../constants/data';
 import { useRoute } from '@react-navigation/native';
 
 type SwipeUpWrapperProps = {
     children?: React.ReactNode;
+    bottomSheet?: boolean;
 }
 
 const MAX_TRANSLATE_Y = -(0.58*windowHeight-50);
 const MIN_TRANSLATE_Y = (0.01*windowHeight)
 
-export const SwipeUpWrapper: React.FC<SwipeUpWrapperProps> = ({children}) => {
+export const SwipeUpWrapper: React.FC<SwipeUpWrapperProps> = ({children, bottomSheet}) => {
     
     const route = useRoute();
 
@@ -24,7 +25,8 @@ export const SwipeUpWrapper: React.FC<SwipeUpWrapperProps> = ({children}) => {
     const getTopValue = (screen: string) => {
         switch (screen) {
             case 'Dashboard':
-                return windowHeight-50
+                // return windowHeight - 50
+                return windowHeight*0.935
             case 'SendMoney':
                 return windowHeight*0.50
         }
@@ -33,6 +35,12 @@ export const SwipeUpWrapper: React.FC<SwipeUpWrapperProps> = ({children}) => {
     React.useEffect(() => {
         translateY.value = withSpring(MAX_TRANSLATE_Y, { damping: 50 })
     }, [])
+
+    React.useEffect(() => {
+        if(route.name === 'SendMoney'){
+            translateY.value = withSpring(bottomSheet ? MAX_TRANSLATE_Y: MIN_TRANSLATE_Y, { damping: 50 })
+        }
+    }, [bottomSheet])
     
 
     const gesture = Gesture.Pan()
@@ -43,7 +51,11 @@ export const SwipeUpWrapper: React.FC<SwipeUpWrapperProps> = ({children}) => {
             translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y)
             translateY.value = Math.min(translateY.value, MIN_TRANSLATE_Y)
         }).onEnd(() => {
-            translateY.value = withSpring(MAX_TRANSLATE_Y, { damping: 50 })
+            if(translateY.value < -windowHeight/5){
+                translateY.value = withSpring(MAX_TRANSLATE_Y, { damping: 50 })
+            }else{
+                translateY.value = withSpring(MIN_TRANSLATE_Y, { damping: 50 })
+            }
         })
 
     const animatedStyle = useAnimatedStyle(() => {
@@ -54,10 +66,10 @@ export const SwipeUpWrapper: React.FC<SwipeUpWrapperProps> = ({children}) => {
     
     return (
         <GestureDetector gesture={gesture}>
-        <Animated.View style={[styles.wrapperContainer, animatedStyle, {top: getTopValue(route.name)}]}>
-            <View style={styles.tapBar} />
-            {children}
-        </Animated.View>
+            <Animated.View style={[styles.wrapperContainer, animatedStyle, {top: getTopValue(route.name)}]}>
+                <View style={styles.tapBar} />
+                {children}
+            </Animated.View>
         </GestureDetector>
     )
 }

@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import Profile from '../assets/svg/profile.svg';
+import { StyleSheet, View, Image } from "react-native";
 import { scale, STRINGS } from "../constants/data";
 import { Label } from "./Label";
 
@@ -11,7 +10,7 @@ export const ProfileCard: React.FC = () => {
         <View style={styles.container}>
             <View style={styles.outerCircle}>
                 <View style={styles.innerCircle}>
-                    <Profile width={100*scale} />
+                    <Image source={require('../assets/png/profile.png')} style={styles.profileImg} />
                 </View>
             </View>
             <Label type="name" content={STRINGS.name} />
@@ -41,5 +40,9 @@ const styles = StyleSheet.create({
         borderRadius:150*scale,
         alignItems:'center',
         justifyContent:'center',
+    },
+    profileImg: {
+        height:100*scale,
+        width:100*scale
     }
 })

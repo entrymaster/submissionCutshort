@@ -1,4 +1,3 @@
-import { scale } from "./data";
 
 export type CutshortTheme = {
   sizes: any,
@@ -23,10 +22,6 @@ export const SIZES = {
   b2: 12.5,
 
   p: 16,
-
-  buttonHeight: 48,
-  buttonRadius: 4,
-  buttonBorder: 0,
 };
 
 export const colors = {
@@ -34,7 +29,9 @@ export const colors = {
   primaryTextColor: '#FAFAFA',
   primaryBtnTextColor: '#fff',
 
-  selectedColor: '#1DC76B',
+  selectedProfileColor: '#1DC76B',
+
+  defaultWhite: '#fff',
 
   headingTextColor: '#fff',
   amountTextColor: '#EEEEEE',
@@ -42,7 +39,12 @@ export const colors = {
   nameColor: '#EEEEEE',
 
   welcomeBtnWrapper: '#fff',
-  welcomeBtnText: '#17288E'
+  welcomeBtnText: '#17288E',
+
+  transactionReceived: '#1DC7AC',
+  transactionFailed: '#FE4A54',
+  transactionSent: '#FAAD39',
+
 }
 
 const textStyles = {
