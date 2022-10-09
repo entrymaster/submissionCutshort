@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter-SemiBold',
     },
     transactionContainer: {
-        // height:'58%',
+        height:'58%',
         width:'100%',
         // bottom: 0,
         position:'absolute'

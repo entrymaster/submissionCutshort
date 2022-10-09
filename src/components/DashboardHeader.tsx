@@ -10,7 +10,7 @@ export const DashboardHeader: React.FC = () => {
     return (
         <View style={styles.container}>
             <View style={styles.itemContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity style={{paddingRight:16}}>
                     <Burger width={48*scale} />
                 </TouchableOpacity>
                 <Label type="title" content={STRINGS.dashboardHeaderText} />
@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
     itemContainer:{
         flexDirection:'row',
         alignItems:'center',
-        width: '50%',
-        justifyContent:'space-between'
     },
     addMoneyBtn:{
         width:90*scale,
